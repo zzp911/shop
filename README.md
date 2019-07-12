@@ -1,6 +1,6 @@
-# my-shop
+# my-first-vue-project
 
-> my first demo
+> 技术栈：vue--cli,vuex,vue-router全家桶，sass预处理，axios请求库，mock模拟数据，es6-7
 
 ## Build Setup
 

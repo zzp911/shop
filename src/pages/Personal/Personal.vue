@@ -1,11 +1,16 @@
 <template>
-  <div>
-    Personal
-  </div>
+  <section class="personal">
+    <HeaderTop title="我的"></HeaderTop>
+  </section>
 </template>
 
 <script>
-export default {}
+import HeaderTop from '../../components/HeaderTop/HeaderTop'
+export default {
+  components: {
+    HeaderTop
+  }
+}
 </script>
 
 <style lang="scss">

@@ -1,6 +1,6 @@
 export default {
-  longitude: '', // 经度
-  latitude: '', // 纬度
+  latitude: 23.1343340000, // 纬度
+  longitude: 113.2848850000, // 经度
   shops: [], // 商家数组
   categorys: [], // 食品分类数组
   address: {}, // 地址对象

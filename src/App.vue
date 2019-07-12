@@ -11,9 +11,17 @@ export default {
   name: 'App',
   components: {
     FooterGuide
+  },
+  mounted () {
+    this.$store.dispatch('getAddress')
   }
 }
 </script>
 
 <style lang="scss">
+  #app{
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+  }
 </style>

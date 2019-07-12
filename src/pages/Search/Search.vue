@@ -1,11 +1,16 @@
 <template>
-  <div>
-    Search
-  </div>
+  <section class="search">
+    <HeaderTop title="搜索"></HeaderTop>
+  </section>
 </template>
 
 <script>
-export default {}
+import HeaderTop from '../../components/HeaderTop/HeaderTop'
+export default {
+  components: {
+    HeaderTop
+  }
+}
 </script>
 
 <style lang="scss">

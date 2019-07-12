@@ -14,7 +14,7 @@ $bc: #e4e4e4;
 // 1像素上边框
 @mixin top-border-1px ($color) {
   position: relative;
-  &::after{
+  &::before{
     content: '';
     position: absolute;
     left: 0;
@@ -39,12 +39,7 @@ $bc: #e4e4e4;
     transform: scaleY(0.5);
   }
 }
-// 省略号
-@mixin ellipsis{
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
 //根据像素比缩放1px像素边框
 @media only screen and (-webkit-device-pixel-ratio: 2 ) {
   .border-1px{

@@ -23,47 +23,13 @@
         <div class="swiper-pagination"></div>
       </div>
     </nav>
-    <div class="home_shop_list">
-      <div class="shop_header">
-        <i class="iconfont iconiconnav"></i>
-        <span>附近商家</span>
-      </div>
-      <div class="shop_container">
-        <ul class="shop_list">
-          <li class="shop_li">
-            <a href="#">
-              <div class="shop_left">
-                <img src="">
-              </div>
-              <div class="shop_right">
-                <section class="shop_detail_header">
-                  <h4>吃饭的地方</h4>
-                  <ul>
-                    <li class="supports">保</li>
-                  </ul>
-                </section>
-                <section class="shop_rating_order">
-                  <div class="shop_rating_order_left">
-                    <div class="star star-24"></div>
-                    <div class="rating_div">4.5</div>
-                    <div class="order_div">月售100单</div>
-                  </div>
-                  <div class="shop_rating_order_right">
-                    <span class="delivery_style delivery_right">专送</span>
-                  </div>
-                </section>
-                <section class="shop_distance"></section>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <ShopsList></ShopsList>
   </section>
 </template>
 
 <script>
 import HeaderTop from '../../components/HeaderTop/HeaderTop'
+import ShopsList from '../../components/ShopsList/ShopsList'
 import {mapState} from 'vuex'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
@@ -108,7 +74,8 @@ export default {
     }
   },
   components: {
-    HeaderTop
+    HeaderTop,
+    ShopsList
   }
 }
 </script>
@@ -156,11 +123,6 @@ export default {
           background-color: #02a774;
         }
       }
-    }
-    .home_shop_list{
-      margin-top: 10px;
-      position: relative;
-      background-color: #ffffff;
     }
   }
 </style>

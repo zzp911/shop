@@ -1,10 +1,12 @@
 import {
   RECEIVE_ADDRESS,
-  RECEIVE_CATEGORYS
+  RECEIVE_CATEGORYS,
+  RECEIVE_SHOPS
 } from './mutation-types'
 import {
   reqAddress,
-  reqFoodCategorys
+  reqFoodCategorys,
+  reqShopLists
 } from '../api'
 
 export default {
@@ -23,6 +25,15 @@ export default {
     if (result.code === 0) {
       const categorys = result.data
       commit(RECEIVE_CATEGORYS, {categorys})
+    }
+  },
+  // 请求商铺列表
+  async getShopLists ({commit, state}) {
+    const {longitude, latitude} = state
+    const result = await reqShopLists(longitude, latitude)
+    if (result.code === 0) {
+      const shops = result.data
+      commit(RECEIVE_SHOPS, {shops})
     }
   }
 }

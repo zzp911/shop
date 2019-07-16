@@ -19,7 +19,12 @@
 </template>
 
 <script>
-export default {}
+import ShopHeader from '../../components/ShopHeader/ShopHeader'
+export default {
+  components: {
+    ShopHeader
+  }
+}
 </script>
 
 <style lang="scss">

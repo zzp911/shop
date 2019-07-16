@@ -4,8 +4,11 @@
       <router-link to="/search" slot="left" class="header_search">
         <i class="iconfont iconiconsousuo"></i>
       </router-link>
-      <router-link to="/login" slot="right" class="header_login">
-        <span>登录|注册</span>
+      <router-link :to="userInfo._id ? '/userInfo' : '/login'" slot="right" class="header_login">
+        <span class="header_login_text" v-if="userInfo._id">
+          <i class="iconfont iconiconpersonaldown"></i>
+        </span>
+        <span v-else>登录|注册</span>
       </router-link>
     </HeaderTop>
     <nav class="home_nav">
@@ -56,7 +59,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['address', 'categorys']),
+    ...mapState(['address', 'categorys', 'userInfo']),
     categorysArr () {
       const {categorys} = this
       const arr = []
@@ -112,6 +115,7 @@ export default {
               &.food_img{
                 padding-bottom: 10px;
                 img{
+                  display: inline-block;
                   width: 50px;
                   height: 50px;
                 }

@@ -188,8 +188,8 @@ export default {
               font-size: 12px;
               .shop_delivery_msg{
                 float: left;
-                transform-orig7in: 0;
-                transfrom: scale(0.9);
+                transform-origin: 0;
+                transform: scale(0.9);
                 color: #666666;
                 .segmentation{
                   color: #cccccc;

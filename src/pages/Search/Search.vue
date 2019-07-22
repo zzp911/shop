@@ -3,7 +3,7 @@
     <HeaderTop title="搜索"></HeaderTop>
     <form class="search_form" action="#" @submit.prevent="getSearchShops">
       <input type="search" name="search" placeholder="请输入商家或美食名称" class="search_input" v-model="keyword">
-      <input type="submit" name="submit" class="search_submit" @click="search_loading">
+      <input type="submit" name="submit" class="search_submit">
     </form>
     <section class="list" v-if="!noSearchResult">
       <ul class="list_container">
@@ -25,21 +25,18 @@
       </ul>
     </section>
     <div class="search_none" v-else>很抱歉!暂无搜索结果</div>
-    <div class="search_loading" v-if="loading">搜索中...</div>
   </section>
 </template>
 
 <script>
 import HeaderTop from '../../components/HeaderTop/HeaderTop'
 import {mapState} from 'vuex'
-import BScoll from 'better-scroll'
 export default {
   data () {
     return {
       keyword: '',
       imgBaseUrl: 'http://cangdu.org:8001/img/',
-      noSearchResult: false,
-      loading: false
+      noSearchResult: false
     }
   },
   methods: {
@@ -47,11 +44,6 @@ export default {
       const keyword = this.keyword.trim()
       if (keyword) {
         this.$store.dispatch('getSearchShops', keyword)
-      }
-    },
-    search_loading () {
-      if (this.keyword) {
-        this.loading = true
       }
     }
   },
@@ -62,14 +54,8 @@ export default {
     searchShops (value) {
       if (!value.length) {
         this.noSearchResult = true // 无数据
-        this.loading = false
       } else {
         this.noSearchResult = false // 有数据
-        this.loading = false
-        // eslint-disable-next-line no-new
-        new BScoll('.list', {
-          click: true
-        })
       }
     }
   },
@@ -122,6 +108,7 @@ export default {
       left: 0;
       right: 0;
       bottom: 50px;
+      overflow: auto;
       .list_container{
         background: #ffffff;
         .list_li{

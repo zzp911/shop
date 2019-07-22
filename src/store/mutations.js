@@ -4,7 +4,8 @@ import {
   RECEIVE_SHOPS,
   RECEIVE_USERINFO,
   RESET_USERINFO,
-  RECEIVE_SEARCH_SHOPS
+  RECEIVE_SEARCH_SHOPS,
+  RECEIVE_INFO
 } from './mutation-types'
 
 export default {
@@ -31,5 +32,9 @@ export default {
   // 搜索商铺列表
   [RECEIVE_SEARCH_SHOPS] (state, {searchShops}) {
     state.searchShops = searchShops
+  },
+  // 商家店铺信息
+  [RECEIVE_INFO] (state, {info}) {
+    state.info = info
   }
 }

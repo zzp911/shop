@@ -22,3 +22,10 @@ export const reqPhoneLogin = (phone, code) => ajax(BASE_URL + '/login_sms', {pho
 export const reqUserInfo = () => ajax(BASE_URL + '/userinfo')
 // 10、用户登出
 export const reqLogout = () => ajax(BASE_URL + '/logout')
+
+// 菜单列表
+export const reqShopGoods = () => ajax('./goods')
+// 商家信息
+export const reqShopInfo = () => ajax('./info')
+// 商家评价
+export const reqShopRatings = () => ajax('./ratings')

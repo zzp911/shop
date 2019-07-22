@@ -4,7 +4,8 @@ import {
   RECEIVE_SHOPS,
   RECEIVE_USERINFO,
   RESET_USERINFO,
-  RECEIVE_SEARCH_SHOPS
+  RECEIVE_SEARCH_SHOPS,
+  RECEIVE_INFO
 } from './mutation-types'
 import {
   reqAddress,
@@ -12,7 +13,8 @@ import {
   reqShopLists,
   reqUserInfo,
   reqLogout,
-  reqSearchShops
+  reqSearchShops,
+  reqShopInfo
 } from '../api'
 
 export default {
@@ -68,6 +70,14 @@ export default {
     if (result.code === 0) {
       const searchShops = result.data
       commit(RECEIVE_SEARCH_SHOPS, {searchShops})
+    }
+  },
+  // 获取Mock商家店铺信息
+  async getShopInfo ({commit}) {
+    const result = await reqShopInfo()
+    if (result.code === 0) {
+      const info = result.data
+      commit(RECEIVE_INFO, {info})
     }
   }
 }

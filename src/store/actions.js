@@ -5,7 +5,11 @@ import {
   RECEIVE_USERINFO,
   RESET_USERINFO,
   RECEIVE_SEARCH_SHOPS,
-  RECEIVE_INFO
+  RECEIVE_INFO,
+  RECEIVE_GOODS,
+  RECEIVE_RATINGS,
+  INCREMENT_FOOD_COUNT,
+  DECREMENT_FOOD_COUNT
 } from './mutation-types'
 import {
   reqAddress,
@@ -14,7 +18,9 @@ import {
   reqUserInfo,
   reqLogout,
   reqSearchShops,
-  reqShopInfo
+  reqShopInfo,
+  reqShopGoods,
+  reqShopRatings
 } from '../api'
 
 export default {
@@ -78,6 +84,31 @@ export default {
     if (result.code === 0) {
       const info = result.data
       commit(RECEIVE_INFO, {info})
+    }
+  },
+  // 获取mock商家菜单
+  async getShopGoods ({commit}) {
+    const result = await reqShopGoods()
+    if (result.code === 0) {
+      const goods = result.data
+      commit(RECEIVE_GOODS, {goods})
+    }
+  },
+  // 获取mock商家评价
+  async getShopRatings ({commit}, callback) {
+    const result = await reqShopRatings()
+    if (result.code === 0) {
+      const ratings = result.data
+      commit(RECEIVE_RATINGS, {ratings})
+      callback && callback()
+    }
+  },
+  // 添加购物车
+  updataFoodCount ({commit}, {isAdd, food}) {
+    if (isAdd) {
+      commit(INCREMENT_FOOD_COUNT, {food})
+    } else {
+      commit(DECREMENT_FOOD_COUNT, {food})
     }
   }
 }

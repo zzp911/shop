@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import {
   RECEIVE_ADDRESS,
   RECEIVE_CATEGORYS,
@@ -5,7 +6,11 @@ import {
   RECEIVE_USERINFO,
   RESET_USERINFO,
   RECEIVE_SEARCH_SHOPS,
-  RECEIVE_INFO
+  RECEIVE_INFO,
+  RECEIVE_GOODS,
+  RECEIVE_RATINGS,
+  INCREMENT_FOOD_COUNT,
+  DECREMENT_FOOD_COUNT
 } from './mutation-types'
 
 export default {
@@ -36,5 +41,30 @@ export default {
   // 商家店铺信息
   [RECEIVE_INFO] (state, {info}) {
     state.info = info
+  },
+  // 商家菜单
+  [RECEIVE_GOODS] (state, {goods}) {
+    state.goods = goods
+  },
+  // 商家评价
+  [RECEIVE_RATINGS] (state, {ratings}) {
+    state.ratings = ratings
+  },
+  // 增加购物车
+  [INCREMENT_FOOD_COUNT] (state, {food}) {
+    if (!food.count) {
+      Vue.set(food, 'count', 1)
+    } else {
+      food.count++
+    }
+  },
+  // 减少购物车
+  [DECREMENT_FOOD_COUNT] (state, {food}) {
+    if (food.count) {
+      food.count--
+      if (food.count === 0) {
+
+      }
+    }
   }
 }

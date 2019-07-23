@@ -3,7 +3,7 @@
     <div class="goods">
       <div class="menu-wrapper" ref="menuWrapper">
         <ul>
-          <li class="menu-item" v-for="(good, index) in goods" :key="index">
+          <li class="menu-item" v-for="(good, index) in goods" :key="index" @click="scrollToType(index)" :class="{current: index === currentIndex}">
             <span class="text bottom-border-1px">
               <img class="icon" :src="good.icon" v-if="good.icon">
               {{good.name}}
@@ -39,22 +39,86 @@
           </li>
         </ul>
       </div>
+      <ShopCart></ShopCart>
     </div>
+    <Food ref="food" :food="food"></Food>
   </div>
 </template>
 
 <script>
-import CartControl from '../../../components/cartControls/cartControls'
+import CartControl from '../../../components/CartControls/CartControls'
+import ShopCart from '../../../components/ShopCart/ShopCart'
+import Food from '../../../components/Food/Food'
 import {mapState} from 'vuex'
+import BScroll from 'better-scroll'
 export default {
+  data () {
+    return {
+      scrollY: 0,
+      tops: [],
+      food: {}
+    }
+  },
   mounted () {
-    this.$store.dispatch('getShopGoods')
+    this.$store.dispatch('getShopGoods', () => {
+      this.$nextTick(() => {
+        this._initScroll()
+        this._initTops()
+      })
+    })
+  },
+  methods: {
+    _initScroll () {
+      // eslint-disable-next-line no-new
+      new BScroll('.menu-wrapper', {
+        click: true
+      })
+      this.foodsScroll = new BScroll('.foods-wrapper', {
+        click: true,
+        probeType: 2
+      })
+      this.foodsScroll.on('scroll', ({x, y}) => {
+        this.scrollY = Math.abs(y)
+      })
+      this.foodsScroll.on('scrollEnd', ({x, y}) => {
+        this.scrollY = Math.abs(y)
+      })
+    },
+    _initTops () {
+      const tops = []
+      let top = 0
+      tops.push(top)
+      const lis = this.$refs.foodsUl.getElementsByClassName('food-list-hook')
+      Array.prototype.slice.call(lis).forEach(li => {
+        top += li.clientHeight
+        tops.push(top)
+      })
+      this.tops = tops
+    },
+    scrollToType (index) {
+      const scrollY = this.tops[index]
+      this.scrollY = scrollY
+      this.foodsScroll.scrollTo(0, -scrollY, 300)
+    },
+    showFood (food) {
+      this.food = food
+      this.$refs.food.toggleShow()
+    }
   },
   computed: {
-    ...mapState(['goods'])
+    ...mapState(['goods']),
+    currentIndex () {
+      const {scrollY, tops} = this
+      const index = tops.findIndex((top, index) => {
+        return scrollY >= top && scrollY < tops[index + 1]
+      })
+      return index
+    }
   },
   components: {
-    CartControl
+    CartControl,
+    Food,
+    ShopCart
   }
 }
 </script>
@@ -123,6 +187,9 @@ export default {
         padding-bottom: 18px;
         position: relative;
         border: none;
+        &:last-child{
+          margin-bottom: 0;
+        }
         .icon{
           flex: 0 0 57px;
           margin-right: 10px;
